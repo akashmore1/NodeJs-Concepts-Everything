@@ -4,5 +4,10 @@
 // This object we are directly assigning to fs variable
 const fs = require("fs");
 
+// With readFileSync() we can read file.
 const greet = fs.readFileSync("./files/hi.txt", "utf-8");
 console.log(greet);
+
+let intro = "This is Akash";
+// With writeFileSync() we can write in a file.
+fs.writeFileSync("./files/output.txt", intro);
