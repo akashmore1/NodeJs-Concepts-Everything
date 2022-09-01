@@ -14,8 +14,13 @@ const server = http.createServer((req, res) => {
     res.end("This is from product");
   } else {
     // a header is a piece of information about the response we are sending
-    res.writeHead(404);
-    res.end("Page cannot be found");
+    // We can specify the content type in header
+    // header needs to be defined before response.
+    res.writeHead(404, {
+      "content-type": "text/html",
+      "my-header": "hello_world",
+    });
+    res.end("<h1>Page cannot be found</h1>");
   }
 });
 
