@@ -8,12 +8,14 @@ const url = require("url");
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
-  if (pathName === "/overview") {
+  if (pathName === "/" || pathName === "/overview") {
     res.end("This is from overview");
   } else if (pathName === "/product") {
     res.end("This is from product");
   } else {
-    res.end("Hello from server");
+    // a header is a piece of information about the response we are sending
+    res.writeHead(404);
+    res.end("Page cannot be found");
   }
 });
 
