@@ -4,3 +4,7 @@ The backend (or “server-side”) is the portion of the website you don't see. 
 
 Generally user sends request to server, and server sends back response.
 Response header has response code, if 200, response is ok and successfull.
+
+## Node JS:
+
+1. Node JS is powered by Google V8 engine.
