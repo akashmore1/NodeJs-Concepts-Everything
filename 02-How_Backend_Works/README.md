@@ -25,3 +25,5 @@ Response header has response code, if 200, response is ok and successfull.
 2. Writable Streams
 3. Duplex Streams
 4. Transform Streams
+
+![Types of streams](./Streams.jpeg)
