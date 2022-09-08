@@ -15,3 +15,6 @@ Response header has response code, if 200, response is ok and successfull.
 ## Streams:
 
 1. Used to process(read and write) data piece by piece(chunks), without completing the whole read or write operation.
+2. Therefore we don't have keep all the the data in memory to perform these operationss
+3. e.g Video streaming sites like youtube and netflix
+4. They don't wait to load all video, instead they read video stream by stream
