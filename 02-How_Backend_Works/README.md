@@ -11,3 +11,7 @@ Response header has response code, if 200, response is ok and successfull.
 2. Libuv (created in c++) is used in building node.
 3. Node JS is single threaded architecture.
 4. On its single thread event loop runs.
+
+## Streams:
+
+1. Used to process(read and write) data piece by piece(chunks), without completing the whole read or write operation.
