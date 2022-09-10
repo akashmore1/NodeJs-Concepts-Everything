@@ -7,7 +7,16 @@ server.on("request", (req, res) => {
   //     if (err) console.log(err);
   //     res.end(data);
   //   });
+  // =============================================================== //
   // Solution 2
+
+  const readable = fs.createReadStream("./files/test-file.txt");
+  readable.on("data", (chunk) => {
+    res.write(chunk);
+  });
+  readable.on("end", () => {
+    res.end();
+  });
 });
 
 server.listen(8000, "127.0.0.1", () => {
