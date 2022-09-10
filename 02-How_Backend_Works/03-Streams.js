@@ -14,8 +14,15 @@ server.on("request", (req, res) => {
   readable.on("data", (chunk) => {
     res.write(chunk);
   });
+
   readable.on("end", () => {
     res.end();
+  });
+
+  readable.on("error", (error) => {
+    console.log(error);
+    res.statusCode = 500;
+    res.end("File not found");
   });
 });
 
