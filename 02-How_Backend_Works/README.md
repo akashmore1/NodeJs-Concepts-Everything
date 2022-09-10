@@ -27,3 +27,9 @@ Response header has response code, if 200, response is ok and successfull.
 4. Transform Streams
 
 ![Types of streams](./Streams.jpeg)
+
+### Back pressure
+
+1. Readable stream is much faster than actually sending the result with response writable stream in network.
+2. This will overwhelm the response stream, which cannot handle all this coming data superfast.
+3. This problem is called as Back Pressure.
