@@ -45,3 +45,8 @@ console.log(arguments);
 //   }
 
 // This proves all the code in our module is wrapped inside a function whose arguments are printed above
+
+const calculator = require("./test-module-1");
+
+const calc1 = new calculator();
+calc1.add(4, 3);
