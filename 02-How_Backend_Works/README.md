@@ -43,3 +43,6 @@ Each js file is considered as a separate module.
 Resolving and Loading => Wrapping => Execution => Returning Export => Caching
 
 1. Loading: Involves path to module.
+2. Wraping: Global node function (main) has argument require. So we can use require in node.
+   (exports, require, module, \_filename, \_dirname) => These are globle scope variables
+3. Execution:
