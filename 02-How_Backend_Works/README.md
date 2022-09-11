@@ -33,3 +33,13 @@ Response header has response code, if 200, response is ok and successfull.
 1. Readable stream is much faster than actually sending the result with response writable stream in network.
 2. This will overwhelm the response stream, which cannot handle all this coming data superfast.
 3. This problem is called as Back Pressure.
+
+## A common module system
+
+Each js file is considered as a separate module.
+
+### What happens when we require() a module
+
+Resolving and Loading => Wrapping => Execution => Returning Export => Caching
+
+1. Loading: Involves path to module.
