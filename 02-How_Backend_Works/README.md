@@ -45,4 +45,6 @@ Resolving and Loading => Wrapping => Execution => Returning Export => Caching
 1. Loading: Involves path to module.
 2. Wraping: Global node function (main) has argument require. So we can use require in node.
    (exports, require, module, \_filename, \_dirname) => These are globle scope variables
-3. Execution:
+3. Execution: After module file import is resolved it is executed.
+4. Returning Export: require() function returns exported content in require(<module>)
+5. Caching: Modules are actually cached after they are loaded. Importing module happens only once.It is tored in cache and then used everytime required.
