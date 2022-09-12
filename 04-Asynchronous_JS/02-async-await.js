@@ -31,6 +31,28 @@ const getDogPic = async () => {
   const dogImg = await res.body.message;
 
   await writeFilePro("dog-img.txt", dogImg);
+
+  return "Dog Pic Updated";
 };
 
 getDogPic();
+
+// Returned value from async function
+// async function will always return promise
+// So in order to acess its returned value we can use then() or await
+// e.g.
+
+getDogPic()
+  .then((res) => {
+    console.log(res);
+  })
+  // In order to error handling work we will need to explicitaly throw error in async function
+  .catch((err) => {
+    console.log(err);
+  });
+
+// Or we can use async-await again to print returned value
+(async () => {
+  const res = await getDogPic();
+  console.log(res);
+})();
