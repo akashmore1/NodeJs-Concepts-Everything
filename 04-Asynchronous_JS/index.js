@@ -20,16 +20,16 @@ const superagent = require("superagent");
 // });
 
 // With Promises
-fs.readFile("./dog.txt", (err, data) => {
-  superagent
-    .get(`https://dog.ceo/api/breed/${data}/images/random`)
-    .then((res) => {
-      return res.body.message;
-    })
-    .catch((err) => {
-      throw new Error(err);
-    });
-});
+// fs.readFile("./dog.txt", (err, data) => {
+//   superagent
+//     .get(`https://dog.ceo/api/breed/${data}/images/random`)
+//     .then((res) => {
+//       return res.body.message;
+//     })
+//     .catch((err) => {
+//       throw new Error(err);
+//     });
+// });
 
 // Make reading and writing files through promises
 
@@ -51,10 +51,19 @@ const writeFilePro = (filePath, data) => {
   });
 };
 
-readFilePro("./dog.txt").then((res) => {
-  superagent
-    .get(`https://dog.ceo/api/breed/${res}/images/random`)
-    .then((res) => {
-      console.log(res.body.message);
+readFilePro("./dog.txt")
+  .then((res) => {
+    return superagent.get(`https://dog.ceo/api/breed/${res}/images/random`);
+  })
+  .then((res) => {
+    console.log(res.body.message);
+    return res.body.message;
+  })
+  .then((msg) => {
+    writeFilePro("./dog-img.txt", msg, (err) => {
+      console.log("Success");
     });
-});
+  })
+  .catch((err) => {
+    console.log(err);
+  });
