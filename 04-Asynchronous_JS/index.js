@@ -42,6 +42,19 @@ const readFilePro = (filePath) => {
   });
 };
 
+const writeFilePro = (filePath, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, data, (err) => {
+      if (err) reject(err);
+      resolve("Success");
+    });
+  });
+};
+
 readFilePro("./dog.txt").then((res) => {
-  superagent.get(`https://dog.ceo/api/breed/${res}/images/random`);
+  superagent
+    .get(`https://dog.ceo/api/breed/${res}/images/random`)
+    .then((res) => {
+      console.log(res.body.message);
+    });
 });
