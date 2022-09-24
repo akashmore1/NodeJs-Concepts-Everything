@@ -1,3 +1,5 @@
+// For running this application 'npx nodemon [your-app.js]'
+
 const express = require('express');
 
 const app = express();
