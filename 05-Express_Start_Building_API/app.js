@@ -53,6 +53,20 @@ app.post('/api/v1/tours', (req, res) => {
   );
 });
 
+// If we only want a particular tour, client will send id for which it require particular tour
+app.get('/api/v1/tours/:id', (req, res) => {
+  console.log(req.params);
+  const id = Number(req.params.id);
+  const requiredTour = tours.filter((tour) => {
+    return tour.id === id;
+  });
+  res.status(200).json({
+    status: 'success',
+    ok: true,
+    tour: requiredTour,
+  });
+});
+
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
   console.log(`App started running at ${port}`);
