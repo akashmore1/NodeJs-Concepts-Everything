@@ -95,6 +95,26 @@ app.patch('/api/v1/tours/:id', (req, res) => {
   );
 });
 
+// Build delete api for Natours
+app.delete('/api/v1/tours/:id', (req, res) => {
+  let id = Number(req.params.id);
+
+  const updatedTours = tours.filter((tour) => {
+    return tour.id !== id;
+  });
+
+  fs.writeFile(
+    './dev-data/data/tours-simple.json',
+    JSON.stringify(updatedTours),
+    () => {
+      res.status(204).json({
+        status: 'success',
+        data: null,
+      });
+    }
+  );
+});
+
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
   console.log(`App started running at ${port}`);
