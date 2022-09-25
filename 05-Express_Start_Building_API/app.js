@@ -70,6 +70,30 @@ app.get('/api/v1/tours/:id', (req, res) => {
 // For updating we use either put or patch api.
 // If we want whole record(object) to be updated, we use put.
 // If we want only some parameters in record(object) to be updated, we use patch.
+app.patch('/api/v1/tours/:id', (req, res) => {
+  tours.forEach((tour) => {
+    if (tour.id === Number(req.params.id)) {
+      tour.name = req.body.name;
+    }
+  });
+
+  const updatedTour = tours.filter((tour) => {
+    return tour.id === Number(req.params.id);
+  });
+
+  fs.writeFile(
+    './dev-data/data/tours-simple.json',
+    JSON.stringify(tours),
+    () => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          tours: updatedTour,
+        },
+      });
+    }
+  );
+});
 
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
