@@ -67,6 +67,10 @@ app.get('/api/v1/tours/:id', (req, res) => {
   });
 });
 
+// For updating we use either put or patch api.
+// If we want whole record(object) to be updated, we use put.
+// If we want only some parameters in record(object) to be updated, we use patch.
+
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
   console.log(`App started running at ${port}`);
