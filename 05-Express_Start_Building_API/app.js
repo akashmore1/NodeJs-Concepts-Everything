@@ -115,11 +115,20 @@ const deleteTour = (req, res) => {
   );
 };
 
-app.get('/api/v1/tours', getAllTours);
-app.post('/api/v1/tours', createNewtour);
-app.get('/api/v1/tours/:id', getTour);
-app.patch('/api/v1/tours/:id', updateTour);
-app.delete('/api/v1/tours/:id', deleteTour);
+// 👇This is a good way but better way we can use routes
+// app.get('/api/v1/tours', getAllTours);
+// app.post('/api/v1/tours', createNewtour);
+// app.get('/api/v1/tours/:id', getTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+
+app.route('/api/v1/tours').get(getAllTours).post(createNewtour);
+
+app
+  .route('/api/v1/tours/:id')
+  .get(getTour)
+  .patch(updateTour)
+  .delete(deleteTour);
 
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
