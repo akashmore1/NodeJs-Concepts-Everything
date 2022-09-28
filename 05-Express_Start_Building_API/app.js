@@ -15,24 +15,30 @@ const tours = JSON.parse(
   fs.readFileSync('./dev-data/data/tours-simple.json', 'utf-8')
 );
 
-// Build natours get api
-app.get('/api/v1/tours', (req, res) => {
+const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
     ok: true,
     result: tours.length,
     data: { tours },
   });
-});
+};
 
-// Build natours post api
-// In post request, we ca send data from client to server
-// 'req' parameter in callback of post request will have that client/user's data.
-// But express doen not make this data directly available in req
-// In order to make that data available, we use middleware.
-// app.use(express.json()); is used to make middleware available
-app.post('/api/v1/tours', (req, res) => {
-  console.log(req.body);
+const getTour = (req, res) => {
+  // console.log(req.params);
+  const id = Number(req.params.id);
+  const requiredTour = tours.filter((tour) => {
+    return tour.id === id;
+  });
+  res.status(200).json({
+    status: 'success',
+    ok: true,
+    tour: requiredTour,
+  });
+};
+
+const createNewtour = (req, res) => {
+  // console.log(req.body);
   const newId = tours[tours.length - 1].id + 1;
   const newTour = Object.assign({ id: newId }, req.body);
 
@@ -51,26 +57,9 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
-});
+};
 
-// If we only want a particular tour, client will send id for which it require particular tour
-app.get('/api/v1/tours/:id', (req, res) => {
-  console.log(req.params);
-  const id = Number(req.params.id);
-  const requiredTour = tours.filter((tour) => {
-    return tour.id === id;
-  });
-  res.status(200).json({
-    status: 'success',
-    ok: true,
-    tour: requiredTour,
-  });
-});
-
-// For updating we use either put or patch api.
-// If we want whole record(object) to be updated, we use put.
-// If we want only some parameters in record(object) to be updated, we use patch.
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
   tours.forEach((tour) => {
     if (tour.id === Number(req.params.id)) {
       tour.name = req.body.name;
@@ -93,10 +82,9 @@ app.patch('/api/v1/tours/:id', (req, res) => {
       });
     }
   );
-});
+};
 
-// Build delete api for Natours
-app.delete('/api/v1/tours/:id', (req, res) => {
+const deleteTour = (req, res) => {
   let id = Number(req.params.id);
 
   const updatedTours = tours.filter((tour) => {
@@ -113,7 +101,29 @@ app.delete('/api/v1/tours/:id', (req, res) => {
       });
     }
   );
-});
+};
+
+// Build natours get api
+app.get('/api/v1/tours', getAllTours);
+
+// Build natours post api
+// In post request, we ca send data from client to server
+// 'req' parameter in callback of post request will have that client/user's data.
+// But express doen not make this data directly available in req
+// In order to make that data available, we use middleware.
+// app.use(express.json()); is used to make middleware available
+app.post('/api/v1/tours', createNewtour);
+
+// If we only want a particular tour, client will send id for which it require particular tour
+app.get('/api/v1/tours/:id', getTour);
+
+// For updating we use either put or patch api.
+// If we want whole record(object) to be updated, we use put.
+// If we want only some parameters in record(object) to be updated, we use patch.
+app.patch('/api/v1/tours/:id', updateTour);
+
+// Build delete api for Natours
+app.delete('/api/v1/tours/:id', deleteTour);
 
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
