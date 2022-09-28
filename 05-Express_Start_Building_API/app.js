@@ -8,6 +8,25 @@ const app = express();
 // middleware
 app.use(express.json());
 
+// create our own middleware
+// If we define our middleware after the route, it will not be executed
+app.use((req, res, next) => {
+  console.log('Hello from middleware');
+  // We always need to call next() method while creating a middleware
+  // Otherwise req-res cycle will be stuck
+  // We would never be able to move on and will not be able to send client a response
+  next();
+  // console.log(req.body, res);
+});
+
+// Let's create a new middleware and actually manipulate request object
+app.use((req, res, next) => {
+  req.reqTime = new Date().toISOString();
+  // We can send this reqtime in response.
+  // It's really easy to work with req-res cycle because of middleware
+  next();
+});
+
 const port = 3000;
 
 // Convert into javsscript object
@@ -20,6 +39,7 @@ const getAllTours = (req, res) => {
   res.status(200).json({
     status: 'success',
     ok: true,
+    reqTime: req.reqTime,
     result: tours.length,
     data: { tours },
   });
