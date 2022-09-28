@@ -16,3 +16,10 @@
 3. Use HTTP methods (verbs)
 4. Send data as JSON
 5. Be stateless
+
+## Middleware
+
+1. To access req and res object we use middleware.
+2. We use **'app.use()'** method yo use middleware
+
+![Middleware req-res cycle](./Req-Res_Cycle.jpeg)
