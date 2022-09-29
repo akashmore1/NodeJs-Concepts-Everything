@@ -2,10 +2,12 @@
 
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
-// middleware
+// =================================================== middlewares ================================================== //
+app.use(morgan('dev'));
 app.use(express.json());
 
 // create our own middleware
@@ -27,6 +29,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// =================================================== needed variables ================================================== //
 const port = 3000;
 
 // Convert into javsscript object
@@ -34,6 +37,7 @@ const tours = JSON.parse(
   fs.readFileSync('./dev-data/data/tours-simple.json', 'utf-8')
 );
 
+// =================================================== route handlers ================================================== //
 // Build natours get api
 const getAllTours = (req, res) => {
   res.status(200).json({
@@ -135,6 +139,7 @@ const deleteTour = (req, res) => {
   );
 };
 
+// =================================================== routes ================================================== //
 // 👇This is a good way but better way we can use routes
 // app.get('/api/v1/tours', getAllTours);
 // app.post('/api/v1/tours', createNewtour);
@@ -150,6 +155,7 @@ app
   .patch(updateTour)
   .delete(deleteTour);
 
+// =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
 app.listen(port, () => {
   console.log(`App started running at ${port}`);

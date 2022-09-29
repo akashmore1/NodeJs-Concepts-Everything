@@ -23,3 +23,7 @@
 2. We use **'app.use()'** method yo use middleware
 
 ![Middleware req-res cycle](./Req-Res_Cycle.jpeg)
+
+## Using Third Party Middleware
+
+1. We are going to use morgan as a third party middleware, used for logging
