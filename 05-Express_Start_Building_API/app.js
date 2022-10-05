@@ -175,18 +175,26 @@ const deleteUser = (req, res) => {
 //   .patch(updateTour)
 //   .delete(deleteTour);
 
-app
-  .route('/api/v1/users')
-  .get(getAllUsers)
-  .post(createUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+// app
+//   .route('/api/v1/users')
+//   .get(getAllUsers)
+//   .post(createUser)
+//   .patch(updateUser)
+//   .delete(deleteUser);
 
 const tourRouter = express.Router();
 app.use('/api/v1/tours', tourRouter);
 tourRouter.route('/').get(getAllTours).post(createNewtour);
-
 tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
+
+const userRouter = express.Router();
+app.use('/api/v1/users', userRouter);
+userRouter
+  .route('/')
+  .get(getAllUsers)
+  .post(createUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 // =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
