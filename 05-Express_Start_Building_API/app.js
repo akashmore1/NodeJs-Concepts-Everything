@@ -166,13 +166,14 @@ const deleteUser = (req, res) => {
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
 
-app.route('/api/v1/tours').get(getAllTours).post(createNewtour);
+// 👇This ia also a way to define route but nedd to refact so commented
+// app.route('/api/v1/tours').get(getAllTours).post(createNewtour);
 
-app
-  .route('/api/v1/tours/:id')
-  .get(getTour)
-  .patch(updateTour)
-  .delete(deleteTour);
+// app
+//   .route('/api/v1/tours/:id')
+//   .get(getTour)
+//   .patch(updateTour)
+//   .delete(deleteTour);
 
 app
   .route('/api/v1/users')
@@ -180,6 +181,12 @@ app
   .post(createUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+const tourRouter = express.Router();
+app.use('/api/v1/tours', tourRouter);
+tourRouter.route('/').get(getAllTours).post(createNewtour);
+
+tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
 // =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
