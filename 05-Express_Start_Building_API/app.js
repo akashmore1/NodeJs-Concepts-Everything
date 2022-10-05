@@ -146,6 +146,18 @@ const getAllUsers = (req, res) => {
   res.status(200).json({ users: users });
 };
 
+const createUser = (req, res) => {
+  res.status(504).send('Internal server error');
+};
+
+const updateUser = (req, res) => {
+  res.status(504).send('Internal server error');
+};
+
+const deleteUser = (req, res) => {
+  res.status(504).send('Internal server error');
+};
+
 // =================================================== routes ================================================== //
 // 👇This is a good way but better way we can use routes
 // app.get('/api/v1/tours', getAllTours);
@@ -162,7 +174,12 @@ app
   .patch(updateTour)
   .delete(deleteTour);
 
-app.route('/api/v1/users').get(getAllUsers);
+app
+  .route('/api/v1/users')
+  .get(getAllUsers)
+  .post(createUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 // =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
