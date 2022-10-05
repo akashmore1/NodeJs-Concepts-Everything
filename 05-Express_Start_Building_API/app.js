@@ -37,6 +37,7 @@ const tours = JSON.parse(
   fs.readFileSync('./dev-data/data/tours-simple.json', 'utf-8')
 );
 
+const users = JSON.parse(fs.readFileSync('./dev-data/data/users.json'));
 // =================================================== route handlers ================================================== //
 // Build natours get api
 const getAllTours = (req, res) => {
@@ -139,6 +140,12 @@ const deleteTour = (req, res) => {
   );
 };
 
+// Get users
+
+const getAllUsers = (req, res) => {
+  res.status(200).json({ users: users });
+};
+
 // =================================================== routes ================================================== //
 // 👇This is a good way but better way we can use routes
 // app.get('/api/v1/tours', getAllTours);
@@ -154,6 +161,8 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route('/api/v1/users').get(getAllUsers);
 
 // =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
