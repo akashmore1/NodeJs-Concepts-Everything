@@ -1,8 +1,6 @@
 const express = require('express');
-
+const fs = require('fs');
 const router = express.Router();
-
-app.use('/api/v1/tours', router);
 
 // Convert into javsscript object
 const tours = JSON.parse(

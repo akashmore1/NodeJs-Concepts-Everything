@@ -1,11 +1,8 @@
 const express = require('express');
-
+const fs = require('fs');
 const router = express.Router();
-app.use('/api/v1/users', router);
 
-const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/dev-data/data/users.json`)
-);
+const users = JSON.parse(fs.readFileSync('../dev-data/data/users.json'));
 // =================================================== route handlers ================================================== //
 
 // Get users

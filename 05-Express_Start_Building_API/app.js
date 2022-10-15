@@ -3,7 +3,8 @@
 const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
-
+const userRoutes = require('./routes/userRoutes');
+const tourRoutes = require('./routes/tourRoutes');
 const app = express();
 
 // =================================================== middlewares ================================================== //
@@ -32,32 +33,6 @@ app.use((req, res, next) => {
 // =================================================== needed variables ================================================== //
 const port = 3000;
 
-// Convert into javsscript object
-const tours = JSON.parse(
-  fs.readFileSync('./dev-data/data/tours-simple.json', 'utf-8')
-);
-
-const users = JSON.parse(fs.readFileSync('./dev-data/data/users.json'));
-// =================================================== route handlers ================================================== //
-
-// Get users
-
-const getAllUsers = (req, res) => {
-  res.status(200).json({ users: users });
-};
-
-const createUser = (req, res) => {
-  res.status(504).send('Internal server error');
-};
-
-const updateUser = (req, res) => {
-  res.status(504).send('Internal server error');
-};
-
-const deleteUser = (req, res) => {
-  res.status(504).send('Internal server error');
-};
-
 // =================================================== routes ================================================== //
 // 👇This is a good way but better way we can use routes
 // app.get('/api/v1/tours', getAllTours);
@@ -81,6 +56,9 @@ const deleteUser = (req, res) => {
 //   .post(createUser)
 //   .patch(updateUser)
 //   .delete(deleteUser);
+
+app.use('/api/v1/tours', tourRoutes);
+app.use('/api/v1/tours', userRoutes);
 
 // =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
