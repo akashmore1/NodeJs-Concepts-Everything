@@ -4,6 +4,22 @@ const router = express.Router();
 
 app.use('/api/v1/tours', router);
 
+// Convert into javsscript object
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json', 'utf-8`)
+);
+
+// Build natours get api
+const getAllTours = (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    ok: true,
+    reqTime: req.reqTime,
+    result: tours.length,
+    data: { tours },
+  });
+};
+
 // If we only want a particular tour, client will send id for which it require particular tour
 const getTour = (req, res) => {
   // console.log(req.params);

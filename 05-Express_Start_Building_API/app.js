@@ -39,16 +39,6 @@ const tours = JSON.parse(
 
 const users = JSON.parse(fs.readFileSync('./dev-data/data/users.json'));
 // =================================================== route handlers ================================================== //
-// Build natours get api
-const getAllTours = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    ok: true,
-    reqTime: req.reqTime,
-    result: tours.length,
-    data: { tours },
-  });
-};
 
 // Get users
 
@@ -91,15 +81,6 @@ const deleteUser = (req, res) => {
 //   .post(createUser)
 //   .patch(updateUser)
 //   .delete(deleteUser);
-
-const userRouter = express.Router();
-app.use('/api/v1/users', userRouter);
-userRouter
-  .route('/')
-  .get(getAllUsers)
-  .post(createUser)
-  .patch(updateUser)
-  .delete(deleteUser);
 
 // =================================================== start the server ================================================== //
 // We don't need to specify content-type in experss it takes care of headers for us
