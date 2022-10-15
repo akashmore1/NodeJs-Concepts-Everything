@@ -1,7 +1,7 @@
 const express = require('express');
 
-const userRouter = express.Router();
-app.use('/api/v1/users', userRouter);
+const router = express.Router();
+app.use('/api/v1/users', router);
 
 const users = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/users.json`)
@@ -26,9 +26,11 @@ const deleteUser = (req, res) => {
   res.status(504).send('Internal server error');
 };
 
-userRouter
+router
   .route('/')
   .get(getAllUsers)
   .post(createUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+module.exports = routers;
